@@ -183,6 +183,75 @@ function backupData(storage: Storage) {
 
 ❌ **Плохо:**
 
+```
+src/
+├── App.tsx
+├── api.ts
+├── button.jsx
+├── userStyles.js
+├── utils.ts
+├── formLogic.ts
+```
+
 ✅ **Хорошо:**
 
+```
+src/
+├── pages/
+│   └── HomePage.tsx
+├── features/
+│   └── user/
+│       ├── components/
+│       ├── hooks/
+│       ├── services/
+│       └── types/
+├── shared/
+│   └── ui/
+│   └── utils/
+```
+
+```
+src/
+├── pages/
+│   └── HomePage.tsx
+│   └── LoginPage.tsx
+├── components/
+│   └── user/
+│   └── loginForm/
+├── services/
+│   └── users/
+│   └── auth/
+├── store/
+│   └── users/
+│   └── auth/
+├── shared/
+│   └── ui/
+│   └── utils/
+│   └── hooks/
+```
+
 ## Импортный ад ../../../utils/helpers/formatDate.js, нет index.js файлов
+
+❌ **Плохо:**
+
+```ts
+import formatDate from "../../../utils/helpers/formatDate";
+import Button from "../../../../../shared/components/ui/Button";
+```
+
+✅ **Хорошо:**
+
+```ts
+// utils/index.ts
+export * from "./helpers/formatDate";
+```
+
+```ts
+// components/index.ts
+export * from "./components/ui/Button";
+```
+
+```ts
+import { formatDate } from "@shared/utils";
+import { Button } from "@shared/components";
+```
