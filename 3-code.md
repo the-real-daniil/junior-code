@@ -181,6 +181,6 @@ const b = a.user;
 ✅ **Хорошо:**
 
 ```ts
-const response = getData();
+const response = getUserData();
 const user = response.user;
 ```
