@@ -184,3 +184,85 @@ const b = a.user;
 const response = getUserData();
 const user = response.user;
 ```
+
+## Не удаляет закомментированный перед отправкой
+
+❌ **Плохо:**
+
+```ts
+// const [rememberMe, setRememberMe] = useState(false);
+// const router = useRouter();
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const { requestToken } = await createRequestToken();
+
+  openExternalLinkInNewTab(
+    `https://www.api.org/authenticate/${requestToken}`
+  );
+
+  // router.push('/');
+};
+```
+
+✅ **Хорошо:**
+
+```ts
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const { requestToken } = await createRequestToken();
+
+  openExternalLinkInNewTab(
+    `https://www.api.org/authenticate/${requestToken}`
+  );
+
+  // TODO: в задаче TASK-432 будет добавлен редирект
+};
+```
+
+## Не удаляет отладочный код (`console.log`, `debugger`)
+
+❌ **Плохо:**
+
+```ts
+const [rememberMe, setRememberMe] = useState(false);
+const router = useRouter();
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  console.log('!!!EVENT:', e);
+  console.log('!!!------------');
+
+  const { requestToken } = await createRequestToken();
+
+  console.log('!!!requestToken:', requestToken);
+  debugger;
+
+  openExternalLinkInNewTab(
+    `https://www.api.org/authenticate/${requestToken}`
+  );
+
+  router.push('/');
+};
+```
+
+✅ **Хорошо:**
+
+```ts
+const [rememberMe, setRememberMe] = useState(false);
+const router = useRouter();
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const { requestToken } = await createRequestToken();
+
+  openExternalLinkInNewTab(
+    `https://www.api.org/authenticate/${requestToken}`
+  );
+
+  router.push('/');
+};
+```
